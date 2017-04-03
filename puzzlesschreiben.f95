@@ -70,7 +70,7 @@ PROGRAM puzzleschreiben
   ! zwischenspeichern, damit alle Nummern über alle Buchten verteilt werden
   ! und es keine getrennte Nummerierung für senkrechte und waagerechte Buchten gibt
   zeilenbuchten = reshape(buchtenliste(:SIZE(zeilenbuchten)), SHAPE(zeilenbuchten))
-  spaltenbuchten = reshape(buchtenliste(SIZE(zeilenbuchten):), SHAPE(spaltenbuchten))
+  spaltenbuchten = reshape(buchtenliste(SIZE(zeilenbuchten) + 1:), SHAPE(spaltenbuchten))
   WRITE(format, "(A,I0,A)") "(", width-1, "(I3))"
   WRITE(*,*) "Zeilenbuchten"  
   WRITE(*, format) zeilenbuchten
