@@ -1,7 +1,7 @@
 PROGRAM puzzleschreiben
   ! Dieses Programm schreibt ein Puzzle in eine Datei.
-  ! Diese Puzzle können von Programmen für die Aufgabe 17 von Blatt 8
-  ! Nummerierung vom SoSe 2016) gelöst werden.
+  ! Diese Puzzle können von Programmen für die Aufgabe 18 von Blatt 8
+  ! Nummerierung vom SoSe 2017) gelöst werden.
   ! Das Programm nimmt drei Argumente:
   ! 1) Die Breite des Puzzles
   ! 2) Die Höhe des Puzzles
