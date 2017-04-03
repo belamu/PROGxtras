@@ -1,12 +1,15 @@
 PROGRAM puzzleschreiben
   ! Dieses Programm schreibt ein Puzzle in eine Datei.
   ! Diese Puzzle können von Programmen für die Aufgabe 18 von Blatt 8
-  ! Nummerierung vom SoSe 2017) gelöst werden.
+  ! (Nummerierung vom SoSe 2017) gelöst werden.
   ! Das Programm nimmt drei Argumente:
   ! 1) Die Breite des Puzzles
   ! 2) Die Höhe des Puzzles
   ! 3) Die Beschriftung des Puzzles (wenn es zu wenig Zeichen sind, werden die restlichen mit Leerzeichen aufgefüllt)
   ! wenn das Puzzle mehr als 1000 Teile hat und mehr als 1000 Zeichen angegeben werden, werden trotzdem nur 1000 Teile beschriftet. Euren nächsten Roman könnt ihr hier also nicht verewigen. Sorry. (Bei Bedarf ersetze 1000 unten durch einen größeren Wert.)
+  ! Also eine beispielhafte Nutzung ist
+  ! f95 puzzleerzeugen.f96 -o pe
+  ! ./pe 5 3 "Puzzle sindTOLL"
 
   IMPLICIT NONE
 
