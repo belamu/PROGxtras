@@ -1,15 +1,12 @@
 PROGRAM puzzleschreiben
   ! Dieses Programm schreibt ein Puzzle in eine Datei.
-  ! Diese Puzzle können von Programmen für die Aufgabe 18 von Blatt 8
-  ! (Nummerierung vom SoSe 2017) gelöst werden.
+  ! Diese Puzzle können von Programmen für die Aufgabe 17 von Blatt 8
+  ! Nummerierung vom SoSe 2016) gelöst werden.
   ! Das Programm nimmt drei Argumente:
   ! 1) Die Breite des Puzzles
   ! 2) Die Höhe des Puzzles
   ! 3) Die Beschriftung des Puzzles (wenn es zu wenig Zeichen sind, werden die restlichen mit Leerzeichen aufgefüllt)
   ! wenn das Puzzle mehr als 1000 Teile hat und mehr als 1000 Zeichen angegeben werden, werden trotzdem nur 1000 Teile beschriftet. Euren nächsten Roman könnt ihr hier also nicht verewigen. Sorry. (Bei Bedarf ersetze 1000 unten durch einen größeren Wert.)
-  ! Also eine beispielhafte Nutzung ist
-  ! f95 puzzleerzeugen.f96 -o pe
-  ! ./pe 5 3 "Puzzle sindTOLL"
 
   IMPLICIT NONE
 
@@ -20,7 +17,7 @@ PROGRAM puzzleschreiben
     CHARACTER :: beschriftung = " "
   END TYPE
 
-  INTEGER, PARAMETER :: NORTH = 1, EAST = 2, WEST = 3, SOUTH = 4, unitnr = 30, zufaellig = 30
+  INTEGER, PARAMETER :: NORTH = 4, EAST = 1, WEST = 3, SOUTH = 2, unitnr = 30, zufaellig = 30
   INTEGER :: pmEins, spalte, zeile, error
   INTEGER :: width = 0, heigth = 0
   INTEGER, DIMENSION(:,:), ALLOCATABLE :: zeilenbuchten, spaltenbuchten
@@ -97,6 +94,7 @@ PROGRAM puzzleschreiben
     END DO
   END DO
 
+  WRITE(*,*) "Teile vor dem Verdrehen"
   CALL putTeile()
   
   ! drehe Teile zufaellig
@@ -104,12 +102,16 @@ PROGRAM puzzleschreiben
   WRITE(*,*) 
   do zeile = 1, width
     do spalte = 1, heigth
+      ! Eckteile werden nicht gedreht:
+      if (.NOT. ((zeile == 1 .OR. zeile == width) .AND. (spalte == 1 .OR. spalte == heigth))) then
       ! zufaellig 0 bis 4 Seiten weit rotiert
-      teile(zeile, spalte)%seiten = CSHIFT(teile(zeile, spalte)%seiten, INT(RAND()*4))
+        teile(zeile, spalte)%seiten = CSHIFT(teile(zeile, spalte)%seiten, INT(RAND()*4))
+      end if
       ! teile(zeile, spalte)%beschriftung = 
     END DO
   END DO
 
+  WRITE(*,*) "Teile nach dem Verdrehen"
   CALL putTeile()
 
   ! schreibe Teile in zufaelliger Reihenfolge in eine Datei
@@ -123,6 +125,8 @@ PROGRAM puzzleschreiben
   END DO
 
   IF (error == 0) THEN
+    ! Breite und Hoehe in die Datei schreiben
+    WRITE(unitnr, *) width, heigth
     buchtenliste = permutation(SIZE(teile))
     DO pmEins = 1, SIZE(buchtenliste)
       ! zeilenweise nummerieren
