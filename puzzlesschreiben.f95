@@ -31,24 +31,40 @@ PROGRAM puzzleschreiben
   CHARACTER(len=1000) :: text
   ! bei einer Zeichenkette wüsste ich nicht wie ich einzelne Zeichen ansprechen könnte
 
-  
-  CALL GETARG(2, text)
-  READ(UNIT=text, FMT=*, iostat = error) heigth
-  if (error /= 0. .OR. heigth < 1) THEN
-    STOP "Höhenangabe konnte nicht als natürliche Zahl geparst werden."
-  ELSE
-    WRITE(*,*) "Höhe", heigth
-  END IF
+  ! Höhe und Breite einlesen, falls nicht als Argumente gegeben
+  if (COMMAND_ARGUMENT_COUNT() < 3) then
+    WRITE(*,*) "Du kannst die Breite, Höhe und Beschriftung des Puzzles&
+    & einfach hinter den Programmaufruf schreiben. Gib jetzt die Höhe ein:"
+    READ(*,*, iostat = error) heigth
+    if (error /= 0 .OR. heigth < 1) then
+      STOP "Höhenangabe konnte nicht als natürliche Zahl geparst werden."
+    endif
+    WRITE(*,*) "Breite:"
+    READ(*,*, iostat = error) width
+    if (error /= 0 .OR. width < 1) then
+      STOP "Breitenangabe konnte nicht als natürliche Zahl geparst werden."
+    endif
+    WRITE(*,*) "Text, der auf dem Puzzle steht (wenn Leerzeichen enthalten sind umrahme den Text mit Anführungszeichen):"
+    READ(*,*, iostat = error) text
+  else
+    CALL GETARG(2, text)
+    READ(UNIT=text, FMT=*, iostat = error) heigth
+    if (error /= 0. .OR. heigth < 1) THEN
+      STOP "Höhenangabe konnte nicht als natürliche Zahl geparst werden."
+    ELSE
+      WRITE(*,*) "Höhe", heigth
+    END IF
 
-  CALL GETARG(1, text)
-  READ(UNIT=text, FMT=*, iostat = error) width
-  if (error /= 0. .OR. width < 1) THEN
-    STOP "Breitenangabe konnte nicht als natürliche Zahl geparst werden."
-  ELSE
-    WRITE (*,*) "Breite", width
-  END IF
-  
-  CALL GETARG(3, text)
+    CALL GETARG(1, text)
+    READ(UNIT=text, FMT=*, iostat = error) width
+    if (error /= 0. .OR. width < 1) THEN
+      STOP "Breitenangabe konnte nicht als natürliche Zahl geparst werden."
+    ELSE
+      WRITE (*,*) "Breite", width
+    END IF
+    
+    CALL GETARG(3, text)
+  endif
 
   ALLOCATE(zeilenbuchten(width-1, heigth))
   ALLOCATE(spaltenbuchten(width, heigth-1))
