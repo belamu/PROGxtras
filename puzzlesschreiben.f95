@@ -126,7 +126,7 @@ PROGRAM puzzleschreiben
 
   IF (error == 0) THEN
     ! Breite und Hoehe in die Datei schreiben
-    WRITE(unitnr, *) width, heigth
+    WRITE(unitnr, *) heigth, width
     buchtenliste = permutation(SIZE(teile))
     DO pmEins = 1, SIZE(buchtenliste)
       ! zeilenweise nummerieren
