@@ -7,6 +7,9 @@ PROGRAM puzzleschreiben
   ! 2) Die Höhe des Puzzles
   ! 3) Die Beschriftung des Puzzles (wenn es zu wenig Zeichen sind, werden die restlichen mit Leerzeichen aufgefüllt)
   ! wenn das Puzzle mehr als 1000 Teile hat und mehr als 1000 Zeichen angegeben werden, werden trotzdem nur 1000 Teile beschriftet. Euren nächsten Roman könnt ihr hier also nicht verewigen. Sorry. (Bei Bedarf ersetze 1000 unten durch einen größeren Wert.)
+  ! Also eine beispielhafte Nutzung ist
+  ! f95 puzzleerzeugen.f96 -o pe
+  ! ./pe 5 3 "Puzzle sindTOLL"
 
   IMPLICIT NONE
 
